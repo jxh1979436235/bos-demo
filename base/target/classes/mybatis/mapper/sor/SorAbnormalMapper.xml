@@ -1,0 +1,313 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jxh.sor.mapper.SorAbnormalMapper">
+  <resultMap id="BaseResultMap" type="com.jxh.sor.entity.SorAbnormal">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="launch_date" jdbcType="TIMESTAMP" property="launchDate" />
+    <result column="launch_person" jdbcType="VARCHAR" property="launchPerson" />
+    <result column="launch_company" jdbcType="VARCHAR" property="launchCompany" />
+    <result column="abnormal_type" jdbcType="BIT" property="abnormalType" />
+    <result column="transfer_int" jdbcType="VARCHAR" property="transferInt" />
+    <result column="cargo_int" jdbcType="VARCHAR" property="cargoInt" />
+    <result column="package_int" jdbcType="VARCHAR" property="packageInt" />
+    <result column="hedge_abn_int" jdbcType="VARCHAR" property="hedgeAbnInt" />
+    <result column="abo_state" jdbcType="BIGINT" property="aboState" />
+    <result column="handle_date" jdbcType="TIMESTAMP" property="handleDate" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, launch_date, launch_person, launch_company, abnormal_type, transfer_int, cargo_int, 
+    package_int, hedge_abn_int, abo_state, handle_date
+  </sql>
+  <select id="selectByExample" parameterType="com.jxh.sor.entity.SorAbnormalExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from sor_abnormal
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from sor_abnormal
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from sor_abnormal
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.jxh.sor.entity.SorAbnormalExample">
+    delete from sor_abnormal
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.jxh.sor.entity.SorAbnormal">
+    insert into sor_abnormal (id, launch_date, launch_person, 
+      launch_company, abnormal_type, transfer_int, 
+      cargo_int, package_int, hedge_abn_int, 
+      abo_state, handle_date)
+    values (#{id,jdbcType=VARCHAR}, #{launchDate,jdbcType=TIMESTAMP}, #{launchPerson,jdbcType=VARCHAR}, 
+      #{launchCompany,jdbcType=VARCHAR}, #{abnormalType,jdbcType=BIT}, #{transferInt,jdbcType=VARCHAR}, 
+      #{cargoInt,jdbcType=VARCHAR}, #{packageInt,jdbcType=VARCHAR}, #{hedgeAbnInt,jdbcType=VARCHAR}, 
+      #{aboState,jdbcType=BIGINT}, #{handleDate,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.jxh.sor.entity.SorAbnormal">
+    insert into sor_abnormal
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="launchDate != null">
+        launch_date,
+      </if>
+      <if test="launchPerson != null">
+        launch_person,
+      </if>
+      <if test="launchCompany != null">
+        launch_company,
+      </if>
+      <if test="abnormalType != null">
+        abnormal_type,
+      </if>
+      <if test="transferInt != null">
+        transfer_int,
+      </if>
+      <if test="cargoInt != null">
+        cargo_int,
+      </if>
+      <if test="packageInt != null">
+        package_int,
+      </if>
+      <if test="hedgeAbnInt != null">
+        hedge_abn_int,
+      </if>
+      <if test="aboState != null">
+        abo_state,
+      </if>
+      <if test="handleDate != null">
+        handle_date,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="launchDate != null">
+        #{launchDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="launchPerson != null">
+        #{launchPerson,jdbcType=VARCHAR},
+      </if>
+      <if test="launchCompany != null">
+        #{launchCompany,jdbcType=VARCHAR},
+      </if>
+      <if test="abnormalType != null">
+        #{abnormalType,jdbcType=BIT},
+      </if>
+      <if test="transferInt != null">
+        #{transferInt,jdbcType=VARCHAR},
+      </if>
+      <if test="cargoInt != null">
+        #{cargoInt,jdbcType=VARCHAR},
+      </if>
+      <if test="packageInt != null">
+        #{packageInt,jdbcType=VARCHAR},
+      </if>
+      <if test="hedgeAbnInt != null">
+        #{hedgeAbnInt,jdbcType=VARCHAR},
+      </if>
+      <if test="aboState != null">
+        #{aboState,jdbcType=BIGINT},
+      </if>
+      <if test="handleDate != null">
+        #{handleDate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.jxh.sor.entity.SorAbnormalExample" resultType="java.lang.Long">
+    select count(*) from sor_abnormal
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update sor_abnormal
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.launchDate != null">
+        launch_date = #{record.launchDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.launchPerson != null">
+        launch_person = #{record.launchPerson,jdbcType=VARCHAR},
+      </if>
+      <if test="record.launchCompany != null">
+        launch_company = #{record.launchCompany,jdbcType=VARCHAR},
+      </if>
+      <if test="record.abnormalType != null">
+        abnormal_type = #{record.abnormalType,jdbcType=BIT},
+      </if>
+      <if test="record.transferInt != null">
+        transfer_int = #{record.transferInt,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cargoInt != null">
+        cargo_int = #{record.cargoInt,jdbcType=VARCHAR},
+      </if>
+      <if test="record.packageInt != null">
+        package_int = #{record.packageInt,jdbcType=VARCHAR},
+      </if>
+      <if test="record.hedgeAbnInt != null">
+        hedge_abn_int = #{record.hedgeAbnInt,jdbcType=VARCHAR},
+      </if>
+      <if test="record.aboState != null">
+        abo_state = #{record.aboState,jdbcType=BIGINT},
+      </if>
+      <if test="record.handleDate != null">
+        handle_date = #{record.handleDate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update sor_abnormal
+    set id = #{record.id,jdbcType=VARCHAR},
+      launch_date = #{record.launchDate,jdbcType=TIMESTAMP},
+      launch_person = #{record.launchPerson,jdbcType=VARCHAR},
+      launch_company = #{record.launchCompany,jdbcType=VARCHAR},
+      abnormal_type = #{record.abnormalType,jdbcType=BIT},
+      transfer_int = #{record.transferInt,jdbcType=VARCHAR},
+      cargo_int = #{record.cargoInt,jdbcType=VARCHAR},
+      package_int = #{record.packageInt,jdbcType=VARCHAR},
+      hedge_abn_int = #{record.hedgeAbnInt,jdbcType=VARCHAR},
+      abo_state = #{record.aboState,jdbcType=BIGINT},
+      handle_date = #{record.handleDate,jdbcType=TIMESTAMP}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jxh.sor.entity.SorAbnormal">
+    update sor_abnormal
+    <set>
+      <if test="launchDate != null">
+        launch_date = #{launchDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="launchPerson != null">
+        launch_person = #{launchPerson,jdbcType=VARCHAR},
+      </if>
+      <if test="launchCompany != null">
+        launch_company = #{launchCompany,jdbcType=VARCHAR},
+      </if>
+      <if test="abnormalType != null">
+        abnormal_type = #{abnormalType,jdbcType=BIT},
+      </if>
+      <if test="transferInt != null">
+        transfer_int = #{transferInt,jdbcType=VARCHAR},
+      </if>
+      <if test="cargoInt != null">
+        cargo_int = #{cargoInt,jdbcType=VARCHAR},
+      </if>
+      <if test="packageInt != null">
+        package_int = #{packageInt,jdbcType=VARCHAR},
+      </if>
+      <if test="hedgeAbnInt != null">
+        hedge_abn_int = #{hedgeAbnInt,jdbcType=VARCHAR},
+      </if>
+      <if test="aboState != null">
+        abo_state = #{aboState,jdbcType=BIGINT},
+      </if>
+      <if test="handleDate != null">
+        handle_date = #{handleDate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jxh.sor.entity.SorAbnormal">
+    update sor_abnormal
+    set launch_date = #{launchDate,jdbcType=TIMESTAMP},
+      launch_person = #{launchPerson,jdbcType=VARCHAR},
+      launch_company = #{launchCompany,jdbcType=VARCHAR},
+      abnormal_type = #{abnormalType,jdbcType=BIT},
+      transfer_int = #{transferInt,jdbcType=VARCHAR},
+      cargo_int = #{cargoInt,jdbcType=VARCHAR},
+      package_int = #{packageInt,jdbcType=VARCHAR},
+      hedge_abn_int = #{hedgeAbnInt,jdbcType=VARCHAR},
+      abo_state = #{aboState,jdbcType=BIGINT},
+      handle_date = #{handleDate,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+
+  <select id="maxId" resultType="string">
+    select max(id) from sor_abnormal
+  </select>
+  <select id="maxHedgeAbnInt" resultType="string">
+    select max(hedge_abn_int) from sor_abnormal
+  </select>
+</mapper>

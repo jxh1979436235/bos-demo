@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jxh.sor.mapper.SorCheckBoundMapper">
+  <resultMap id="BaseResultMap" type="com.jxh.sor.entity.SorCheckBound">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="scan_id" jdbcType="VARCHAR" property="scanId" />
+    <result column="cargo_sum" jdbcType="INTEGER" property="cargoSum" />
+    <result column="check_person" jdbcType="INTEGER" property="checkPerson" />
+    <result column="check_date" jdbcType="TIMESTAMP" property="checkDate" />
+    <result column="check_company" jdbcType="VARCHAR" property="checkCompany" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, scan_id, cargo_sum, check_person, check_date, check_company
+  </sql>
+  <select id="selectByExample" parameterType="com.jxh.sor.entity.SorCheckBoundExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from sor_check_bound
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from sor_check_bound
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from sor_check_bound
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.jxh.sor.entity.SorCheckBoundExample">
+    delete from sor_check_bound
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.jxh.sor.entity.SorCheckBound">
+    insert into sor_check_bound (id, scan_id, cargo_sum, 
+      check_person, check_date, check_company
+      )
+    values (#{id,jdbcType=VARCHAR}, #{scanId,jdbcType=VARCHAR}, #{cargoSum,jdbcType=INTEGER}, 
+      #{checkPerson,jdbcType=INTEGER}, #{checkDate,jdbcType=TIMESTAMP}, #{checkCompany,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.jxh.sor.entity.SorCheckBound">
+    insert into sor_check_bound
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="scanId != null">
+        scan_id,
+      </if>
+      <if test="cargoSum != null">
+        cargo_sum,
+      </if>
+      <if test="checkPerson != null">
+        check_person,
+      </if>
+      <if test="checkDate != null">
+        check_date,
+      </if>
+      <if test="checkCompany != null">
+        check_company,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="scanId != null">
+        #{scanId,jdbcType=VARCHAR},
+      </if>
+      <if test="cargoSum != null">
+        #{cargoSum,jdbcType=INTEGER},
+      </if>
+      <if test="checkPerson != null">
+        #{checkPerson,jdbcType=INTEGER},
+      </if>
+      <if test="checkDate != null">
+        #{checkDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="checkCompany != null">
+        #{checkCompany,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.jxh.sor.entity.SorCheckBoundExample" resultType="java.lang.Long">
+    select count(*) from sor_check_bound
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update sor_check_bound
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.scanId != null">
+        scan_id = #{record.scanId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cargoSum != null">
+        cargo_sum = #{record.cargoSum,jdbcType=INTEGER},
+      </if>
+      <if test="record.checkPerson != null">
+        check_person = #{record.checkPerson,jdbcType=INTEGER},
+      </if>
+      <if test="record.checkDate != null">
+        check_date = #{record.checkDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.checkCompany != null">
+        check_company = #{record.checkCompany,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update sor_check_bound
+    set id = #{record.id,jdbcType=VARCHAR},
+      scan_id = #{record.scanId,jdbcType=VARCHAR},
+      cargo_sum = #{record.cargoSum,jdbcType=INTEGER},
+      check_person = #{record.checkPerson,jdbcType=INTEGER},
+      check_date = #{record.checkDate,jdbcType=TIMESTAMP},
+      check_company = #{record.checkCompany,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jxh.sor.entity.SorCheckBound">
+    update sor_check_bound
+    <set>
+      <if test="scanId != null">
+        scan_id = #{scanId,jdbcType=VARCHAR},
+      </if>
+      <if test="cargoSum != null">
+        cargo_sum = #{cargoSum,jdbcType=INTEGER},
+      </if>
+      <if test="checkPerson != null">
+        check_person = #{checkPerson,jdbcType=INTEGER},
+      </if>
+      <if test="checkDate != null">
+        check_date = #{checkDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="checkCompany != null">
+        check_company = #{checkCompany,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jxh.sor.entity.SorCheckBound">
+    update sor_check_bound
+    set scan_id = #{scanId,jdbcType=VARCHAR},
+      cargo_sum = #{cargoSum,jdbcType=INTEGER},
+      check_person = #{checkPerson,jdbcType=INTEGER},
+      check_date = #{checkDate,jdbcType=TIMESTAMP},
+      check_company = #{checkCompany,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+
+  <select id="maxId" resultType="string">
+    select max(id) from sor_check_bound
+  </select>
+</mapper>

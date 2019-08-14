@@ -1,0 +1,355 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jxh.sor.mapper.SorPackageDetailsMapper">
+  <resultMap id="BaseResultMap" type="com.jxh.sor.entity.SorPackageDetails">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="pid" jdbcType="VARCHAR" property="pid" />
+    <result column="ware_name" jdbcType="VARCHAR" property="wareName" />
+    <result column="destination" jdbcType="VARCHAR" property="destination" />
+    <result column="ticket" jdbcType="INTEGER" property="ticket" />
+    <result column="zctual_cargo_int" jdbcType="INTEGER" property="zctualCargoInt" />
+    <result column="cargo_int" jdbcType="INTEGER" property="cargoInt" />
+    <result column="weight" jdbcType="DOUBLE" property="weight" />
+    <result column="volume" jdbcType="DOUBLE" property="volume" />
+    <result column="service" jdbcType="TIMESTAMP" property="service" />
+    <result column="important_hints" jdbcType="VARCHAR" property="importantHints" />
+    <result column="ask" jdbcType="VARCHAR" property="ask" />
+    <result column="input_type" jdbcType="VARCHAR" property="inputType" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, pid, ware_name, destination, ticket, zctual_cargo_int, cargo_int, weight, volume, 
+    service, important_hints, ask, input_type
+  </sql>
+  <select id="selectByExample" parameterType="com.jxh.sor.entity.SorPackageDetailsExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from sor_package_details
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from sor_package_details
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from sor_package_details
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.jxh.sor.entity.SorPackageDetailsExample">
+    delete from sor_package_details
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.jxh.sor.entity.SorPackageDetails">
+    insert into sor_package_details (id, pid, ware_name, 
+      destination, ticket, zctual_cargo_int, 
+      cargo_int, weight, volume, 
+      service, important_hints, ask, 
+      input_type)
+    values (#{id,jdbcType=VARCHAR}, #{pid,jdbcType=VARCHAR}, #{wareName,jdbcType=VARCHAR}, 
+      #{destination,jdbcType=VARCHAR}, #{ticket,jdbcType=INTEGER}, #{zctualCargoInt,jdbcType=INTEGER}, 
+      #{cargoInt,jdbcType=INTEGER}, #{weight,jdbcType=DOUBLE}, #{volume,jdbcType=DOUBLE}, 
+      #{service,jdbcType=TIMESTAMP}, #{importantHints,jdbcType=VARCHAR}, #{ask,jdbcType=VARCHAR}, 
+      #{inputType,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.jxh.sor.entity.SorPackageDetails">
+    insert into sor_package_details
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="pid != null">
+        pid,
+      </if>
+      <if test="wareName != null">
+        ware_name,
+      </if>
+      <if test="destination != null">
+        destination,
+      </if>
+      <if test="ticket != null">
+        ticket,
+      </if>
+      <if test="zctualCargoInt != null">
+        zctual_cargo_int,
+      </if>
+      <if test="cargoInt != null">
+        cargo_int,
+      </if>
+      <if test="weight != null">
+        weight,
+      </if>
+      <if test="volume != null">
+        volume,
+      </if>
+      <if test="service != null">
+        service,
+      </if>
+      <if test="importantHints != null">
+        important_hints,
+      </if>
+      <if test="ask != null">
+        ask,
+      </if>
+      <if test="inputType != null">
+        input_type,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="pid != null">
+        #{pid,jdbcType=VARCHAR},
+      </if>
+      <if test="wareName != null">
+        #{wareName,jdbcType=VARCHAR},
+      </if>
+      <if test="destination != null">
+        #{destination,jdbcType=VARCHAR},
+      </if>
+      <if test="ticket != null">
+        #{ticket,jdbcType=INTEGER},
+      </if>
+      <if test="zctualCargoInt != null">
+        #{zctualCargoInt,jdbcType=INTEGER},
+      </if>
+      <if test="cargoInt != null">
+        #{cargoInt,jdbcType=INTEGER},
+      </if>
+      <if test="weight != null">
+        #{weight,jdbcType=DOUBLE},
+      </if>
+      <if test="volume != null">
+        #{volume,jdbcType=DOUBLE},
+      </if>
+      <if test="service != null">
+        #{service,jdbcType=TIMESTAMP},
+      </if>
+      <if test="importantHints != null">
+        #{importantHints,jdbcType=VARCHAR},
+      </if>
+      <if test="ask != null">
+        #{ask,jdbcType=VARCHAR},
+      </if>
+      <if test="inputType != null">
+        #{inputType,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.jxh.sor.entity.SorPackageDetailsExample" resultType="java.lang.Long">
+    select count(*) from sor_package_details
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update sor_package_details
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.pid != null">
+        pid = #{record.pid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.wareName != null">
+        ware_name = #{record.wareName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.destination != null">
+        destination = #{record.destination,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ticket != null">
+        ticket = #{record.ticket,jdbcType=INTEGER},
+      </if>
+      <if test="record.zctualCargoInt != null">
+        zctual_cargo_int = #{record.zctualCargoInt,jdbcType=INTEGER},
+      </if>
+      <if test="record.cargoInt != null">
+        cargo_int = #{record.cargoInt,jdbcType=INTEGER},
+      </if>
+      <if test="record.weight != null">
+        weight = #{record.weight,jdbcType=DOUBLE},
+      </if>
+      <if test="record.volume != null">
+        volume = #{record.volume,jdbcType=DOUBLE},
+      </if>
+      <if test="record.service != null">
+        service = #{record.service,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.importantHints != null">
+        important_hints = #{record.importantHints,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ask != null">
+        ask = #{record.ask,jdbcType=VARCHAR},
+      </if>
+      <if test="record.inputType != null">
+        input_type = #{record.inputType,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update sor_package_details
+    set id = #{record.id,jdbcType=VARCHAR},
+      pid = #{record.pid,jdbcType=VARCHAR},
+      ware_name = #{record.wareName,jdbcType=VARCHAR},
+      destination = #{record.destination,jdbcType=VARCHAR},
+      ticket = #{record.ticket,jdbcType=INTEGER},
+      zctual_cargo_int = #{record.zctualCargoInt,jdbcType=INTEGER},
+      cargo_int = #{record.cargoInt,jdbcType=INTEGER},
+      weight = #{record.weight,jdbcType=DOUBLE},
+      volume = #{record.volume,jdbcType=DOUBLE},
+      service = #{record.service,jdbcType=TIMESTAMP},
+      important_hints = #{record.importantHints,jdbcType=VARCHAR},
+      ask = #{record.ask,jdbcType=VARCHAR},
+      input_type = #{record.inputType,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jxh.sor.entity.SorPackageDetails">
+    update sor_package_details
+    <set>
+      <if test="pid != null">
+        pid = #{pid,jdbcType=VARCHAR},
+      </if>
+      <if test="wareName != null">
+        ware_name = #{wareName,jdbcType=VARCHAR},
+      </if>
+      <if test="destination != null">
+        destination = #{destination,jdbcType=VARCHAR},
+      </if>
+      <if test="ticket != null">
+        ticket = #{ticket,jdbcType=INTEGER},
+      </if>
+      <if test="zctualCargoInt != null">
+        zctual_cargo_int = #{zctualCargoInt,jdbcType=INTEGER},
+      </if>
+      <if test="cargoInt != null">
+        cargo_int = #{cargoInt,jdbcType=INTEGER},
+      </if>
+      <if test="weight != null">
+        weight = #{weight,jdbcType=DOUBLE},
+      </if>
+      <if test="volume != null">
+        volume = #{volume,jdbcType=DOUBLE},
+      </if>
+      <if test="service != null">
+        service = #{service,jdbcType=TIMESTAMP},
+      </if>
+      <if test="importantHints != null">
+        important_hints = #{importantHints,jdbcType=VARCHAR},
+      </if>
+      <if test="ask != null">
+        ask = #{ask,jdbcType=VARCHAR},
+      </if>
+      <if test="inputType != null">
+        input_type = #{inputType,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jxh.sor.entity.SorPackageDetails">
+    update sor_package_details
+    set pid = #{pid,jdbcType=VARCHAR},
+      ware_name = #{wareName,jdbcType=VARCHAR},
+      destination = #{destination,jdbcType=VARCHAR},
+      ticket = #{ticket,jdbcType=INTEGER},
+      zctual_cargo_int = #{zctualCargoInt,jdbcType=INTEGER},
+      cargo_int = #{cargoInt,jdbcType=INTEGER},
+      weight = #{weight,jdbcType=DOUBLE},
+      volume = #{volume,jdbcType=DOUBLE},
+      service = #{service,jdbcType=TIMESTAMP},
+      important_hints = #{importantHints,jdbcType=VARCHAR},
+      ask = #{ask,jdbcType=VARCHAR},
+      input_type = #{inputType,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+
+  <select id="maxId" resultType="string">
+    select max(id) from sor_package_details
+  </select>
+
+  <select id="sumTicket" resultType="int" parameterType="string">
+    select sum(ticket) from sor_package_details where  pid=#{id}
+  </select>
+  <select id="sumCargoInt" resultType="int" parameterType="string">
+    select sum(cargo_int) from sor_package_details where  pid=#{id}
+  </select>
+  <select id="sumWeight" resultType="java.lang.Double" parameterType="string">
+    select sum(weight) from sor_package_details where  pid=#{id}
+  </select>
+  <select id="sumVolume" resultType="java.lang.Double" parameterType="string">
+    select sum(volume) from sor_package_details where  pid=#{id}
+  </select>
+</mapper>

@@ -1,0 +1,325 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jxh.sor.mapper.SorPackageMapper">
+  <resultMap id="BaseResultMap" type="com.jxh.sor.entity.SorPackage">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="package_person" jdbcType="INTEGER" property="packagePerson" />
+    <result column="sealInt" jdbcType="VARCHAR" property="sealint" />
+    <result column="destination" jdbcType="VARCHAR" property="destination" />
+    <result column="reckon_des" jdbcType="VARCHAR" property="reckonDes" />
+    <result column="time_limit" jdbcType="TIMESTAMP" property="timeLimit" />
+    <result column="ticket_sum" jdbcType="INTEGER" property="ticketSum" />
+    <result column="cargo_sum" jdbcType="INTEGER" property="cargoSum" />
+    <result column="weight_sum" jdbcType="DOUBLE" property="weightSum" />
+    <result column="volume_sum" jdbcType="DOUBLE" property="volumeSum" />
+    <result column="state" jdbcType="BIT" property="state" />
+    <result column="ask" jdbcType="INTEGER" property="ask" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, package_person, sealInt, destination, reckon_des, time_limit, ticket_sum, cargo_sum, 
+    weight_sum, volume_sum, state, ask
+  </sql>
+  <select id="selectByExample" parameterType="com.jxh.sor.entity.SorPackageExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from sor_package
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from sor_package
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from sor_package
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.jxh.sor.entity.SorPackageExample">
+    delete from sor_package
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.jxh.sor.entity.SorPackage">
+    insert into sor_package (id, package_person, sealInt, 
+      destination, reckon_des, time_limit, 
+      ticket_sum, cargo_sum, weight_sum, 
+      volume_sum, state, ask)
+    values (#{id,jdbcType=VARCHAR}, #{packagePerson,jdbcType=INTEGER}, #{sealint,jdbcType=VARCHAR}, 
+      #{destination,jdbcType=VARCHAR}, #{reckonDes,jdbcType=VARCHAR}, #{timeLimit,jdbcType=TIMESTAMP}, 
+      #{ticketSum,jdbcType=INTEGER}, #{cargoSum,jdbcType=INTEGER}, #{weightSum,jdbcType=DOUBLE}, 
+      #{volumeSum,jdbcType=DOUBLE}, #{state,jdbcType=BIT}, #{ask,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.jxh.sor.entity.SorPackage">
+    insert into sor_package
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="packagePerson != null">
+        package_person,
+      </if>
+      <if test="sealint != null">
+        sealInt,
+      </if>
+      <if test="destination != null">
+        destination,
+      </if>
+      <if test="reckonDes != null">
+        reckon_des,
+      </if>
+      <if test="timeLimit != null">
+        time_limit,
+      </if>
+      <if test="ticketSum != null">
+        ticket_sum,
+      </if>
+      <if test="cargoSum != null">
+        cargo_sum,
+      </if>
+      <if test="weightSum != null">
+        weight_sum,
+      </if>
+      <if test="volumeSum != null">
+        volume_sum,
+      </if>
+      <if test="state != null">
+        state,
+      </if>
+      <if test="ask != null">
+        ask,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="packagePerson != null">
+        #{packagePerson,jdbcType=INTEGER},
+      </if>
+      <if test="sealint != null">
+        #{sealint,jdbcType=VARCHAR},
+      </if>
+      <if test="destination != null">
+        #{destination,jdbcType=VARCHAR},
+      </if>
+      <if test="reckonDes != null">
+        #{reckonDes,jdbcType=VARCHAR},
+      </if>
+      <if test="timeLimit != null">
+        #{timeLimit,jdbcType=TIMESTAMP},
+      </if>
+      <if test="ticketSum != null">
+        #{ticketSum,jdbcType=INTEGER},
+      </if>
+      <if test="cargoSum != null">
+        #{cargoSum,jdbcType=INTEGER},
+      </if>
+      <if test="weightSum != null">
+        #{weightSum,jdbcType=DOUBLE},
+      </if>
+      <if test="volumeSum != null">
+        #{volumeSum,jdbcType=DOUBLE},
+      </if>
+      <if test="state != null">
+        #{state,jdbcType=BIT},
+      </if>
+      <if test="ask != null">
+        #{ask,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.jxh.sor.entity.SorPackageExample" resultType="java.lang.Long">
+    select count(*) from sor_package
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update sor_package
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.packagePerson != null">
+        package_person = #{record.packagePerson,jdbcType=INTEGER},
+      </if>
+      <if test="record.sealint != null">
+        sealInt = #{record.sealint,jdbcType=VARCHAR},
+      </if>
+      <if test="record.destination != null">
+        destination = #{record.destination,jdbcType=VARCHAR},
+      </if>
+      <if test="record.reckonDes != null">
+        reckon_des = #{record.reckonDes,jdbcType=VARCHAR},
+      </if>
+      <if test="record.timeLimit != null">
+        time_limit = #{record.timeLimit,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.ticketSum != null">
+        ticket_sum = #{record.ticketSum,jdbcType=INTEGER},
+      </if>
+      <if test="record.cargoSum != null">
+        cargo_sum = #{record.cargoSum,jdbcType=INTEGER},
+      </if>
+      <if test="record.weightSum != null">
+        weight_sum = #{record.weightSum,jdbcType=DOUBLE},
+      </if>
+      <if test="record.volumeSum != null">
+        volume_sum = #{record.volumeSum,jdbcType=DOUBLE},
+      </if>
+      <if test="record.state != null">
+        state = #{record.state,jdbcType=BIT},
+      </if>
+      <if test="record.ask != null">
+        ask = #{record.ask,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update sor_package
+    set id = #{record.id,jdbcType=VARCHAR},
+      package_person = #{record.packagePerson,jdbcType=INTEGER},
+      sealInt = #{record.sealint,jdbcType=VARCHAR},
+      destination = #{record.destination,jdbcType=VARCHAR},
+      reckon_des = #{record.reckonDes,jdbcType=VARCHAR},
+      time_limit = #{record.timeLimit,jdbcType=TIMESTAMP},
+      ticket_sum = #{record.ticketSum,jdbcType=INTEGER},
+      cargo_sum = #{record.cargoSum,jdbcType=INTEGER},
+      weight_sum = #{record.weightSum,jdbcType=DOUBLE},
+      volume_sum = #{record.volumeSum,jdbcType=DOUBLE},
+      state = #{record.state,jdbcType=BIT},
+      ask = #{record.ask,jdbcType=INTEGER}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jxh.sor.entity.SorPackage">
+    update sor_package
+    <set>
+      <if test="packagePerson != null">
+        package_person = #{packagePerson,jdbcType=INTEGER},
+      </if>
+      <if test="sealint != null">
+        sealInt = #{sealint,jdbcType=VARCHAR},
+      </if>
+      <if test="destination != null">
+        destination = #{destination,jdbcType=VARCHAR},
+      </if>
+      <if test="reckonDes != null">
+        reckon_des = #{reckonDes,jdbcType=VARCHAR},
+      </if>
+      <if test="timeLimit != null">
+        time_limit = #{timeLimit,jdbcType=TIMESTAMP},
+      </if>
+      <if test="ticketSum != null">
+        ticket_sum = #{ticketSum,jdbcType=INTEGER},
+      </if>
+      <if test="cargoSum != null">
+        cargo_sum = #{cargoSum,jdbcType=INTEGER},
+      </if>
+      <if test="weightSum != null">
+        weight_sum = #{weightSum,jdbcType=DOUBLE},
+      </if>
+      <if test="volumeSum != null">
+        volume_sum = #{volumeSum,jdbcType=DOUBLE},
+      </if>
+      <if test="state != null">
+        state = #{state,jdbcType=BIT},
+      </if>
+      <if test="ask != null">
+        ask = #{ask,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jxh.sor.entity.SorPackage">
+    update sor_package
+    set package_person = #{packagePerson,jdbcType=INTEGER},
+      sealInt = #{sealint,jdbcType=VARCHAR},
+      destination = #{destination,jdbcType=VARCHAR},
+      reckon_des = #{reckonDes,jdbcType=VARCHAR},
+      time_limit = #{timeLimit,jdbcType=TIMESTAMP},
+      ticket_sum = #{ticketSum,jdbcType=INTEGER},
+      cargo_sum = #{cargoSum,jdbcType=INTEGER},
+      weight_sum = #{weightSum,jdbcType=DOUBLE},
+      volume_sum = #{volumeSum,jdbcType=DOUBLE},
+      state = #{state,jdbcType=BIT},
+      ask = #{ask,jdbcType=INTEGER}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+
+  <select id="maxId" resultType="string">
+    select max(id) from sor_package
+  </select>
+</mapper>

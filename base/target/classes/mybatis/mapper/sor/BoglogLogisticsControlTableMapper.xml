@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jxh.sor.mapper.BoglogLogisticsControlTableMapper">
+  <resultMap id="BaseResultMap" type="com.jxh.sor.entity.BoglogLogisticsControlTable">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="work_sheet_no" jdbcType="VARCHAR" property="workSheetNo" />
+    <result column="ctype" jdbcType="VARCHAR" property="ctype" />
+    <result column="corporation" jdbcType="VARCHAR" property="corporation" />
+    <result column="waybill_id" jdbcType="VARCHAR" property="waybillId" />
+    <result column="remarks" jdbcType="VARCHAR" property="remarks" />
+    <result column="input_person" jdbcType="INTEGER" property="inputPerson" />
+    <result column="input_date" jdbcType="TIMESTAMP" property="inputDate" />
+    <result column="input_company" jdbcType="VARCHAR" property="inputCompany" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, work_sheet_no, ctype, corporation, waybill_id, remarks, input_person, input_date, 
+    input_company
+  </sql>
+  <select id="selectByExample" parameterType="com.jxh.sor.entity.BoglogLogisticsControlTableExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from boglog_logistics_control_table
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from boglog_logistics_control_table
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from boglog_logistics_control_table
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.jxh.sor.entity.BoglogLogisticsControlTableExample">
+    delete from boglog_logistics_control_table
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.jxh.sor.entity.BoglogLogisticsControlTable">
+    insert into boglog_logistics_control_table (id, work_sheet_no, ctype, 
+      corporation, waybill_id, remarks, 
+      input_person, input_date, input_company
+      )
+    values (#{id,jdbcType=INTEGER}, #{workSheetNo,jdbcType=VARCHAR}, #{ctype,jdbcType=VARCHAR}, 
+      #{corporation,jdbcType=VARCHAR}, #{waybillId,jdbcType=VARCHAR}, #{remarks,jdbcType=VARCHAR}, 
+      #{inputPerson,jdbcType=INTEGER}, #{inputDate,jdbcType=TIMESTAMP}, #{inputCompany,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.jxh.sor.entity.BoglogLogisticsControlTable">
+    insert into boglog_logistics_control_table
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="workSheetNo != null">
+        work_sheet_no,
+      </if>
+      <if test="ctype != null">
+        ctype,
+      </if>
+      <if test="corporation != null">
+        corporation,
+      </if>
+      <if test="waybillId != null">
+        waybill_id,
+      </if>
+      <if test="remarks != null">
+        remarks,
+      </if>
+      <if test="inputPerson != null">
+        input_person,
+      </if>
+      <if test="inputDate != null">
+        input_date,
+      </if>
+      <if test="inputCompany != null">
+        input_company,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="workSheetNo != null">
+        #{workSheetNo,jdbcType=VARCHAR},
+      </if>
+      <if test="ctype != null">
+        #{ctype,jdbcType=VARCHAR},
+      </if>
+      <if test="corporation != null">
+        #{corporation,jdbcType=VARCHAR},
+      </if>
+      <if test="waybillId != null">
+        #{waybillId,jdbcType=VARCHAR},
+      </if>
+      <if test="remarks != null">
+        #{remarks,jdbcType=VARCHAR},
+      </if>
+      <if test="inputPerson != null">
+        #{inputPerson,jdbcType=INTEGER},
+      </if>
+      <if test="inputDate != null">
+        #{inputDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="inputCompany != null">
+        #{inputCompany,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.jxh.sor.entity.BoglogLogisticsControlTableExample" resultType="java.lang.Long">
+    select count(*) from boglog_logistics_control_table
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update boglog_logistics_control_table
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.workSheetNo != null">
+        work_sheet_no = #{record.workSheetNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ctype != null">
+        ctype = #{record.ctype,jdbcType=VARCHAR},
+      </if>
+      <if test="record.corporation != null">
+        corporation = #{record.corporation,jdbcType=VARCHAR},
+      </if>
+      <if test="record.waybillId != null">
+        waybill_id = #{record.waybillId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.remarks != null">
+        remarks = #{record.remarks,jdbcType=VARCHAR},
+      </if>
+      <if test="record.inputPerson != null">
+        input_person = #{record.inputPerson,jdbcType=INTEGER},
+      </if>
+      <if test="record.inputDate != null">
+        input_date = #{record.inputDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.inputCompany != null">
+        input_company = #{record.inputCompany,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update boglog_logistics_control_table
+    set id = #{record.id,jdbcType=INTEGER},
+      work_sheet_no = #{record.workSheetNo,jdbcType=VARCHAR},
+      ctype = #{record.ctype,jdbcType=VARCHAR},
+      corporation = #{record.corporation,jdbcType=VARCHAR},
+      waybill_id = #{record.waybillId,jdbcType=VARCHAR},
+      remarks = #{record.remarks,jdbcType=VARCHAR},
+      input_person = #{record.inputPerson,jdbcType=INTEGER},
+      input_date = #{record.inputDate,jdbcType=TIMESTAMP},
+      input_company = #{record.inputCompany,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jxh.sor.entity.BoglogLogisticsControlTable">
+    update boglog_logistics_control_table
+    <set>
+      <if test="workSheetNo != null">
+        work_sheet_no = #{workSheetNo,jdbcType=VARCHAR},
+      </if>
+      <if test="ctype != null">
+        ctype = #{ctype,jdbcType=VARCHAR},
+      </if>
+      <if test="corporation != null">
+        corporation = #{corporation,jdbcType=VARCHAR},
+      </if>
+      <if test="waybillId != null">
+        waybill_id = #{waybillId,jdbcType=VARCHAR},
+      </if>
+      <if test="remarks != null">
+        remarks = #{remarks,jdbcType=VARCHAR},
+      </if>
+      <if test="inputPerson != null">
+        input_person = #{inputPerson,jdbcType=INTEGER},
+      </if>
+      <if test="inputDate != null">
+        input_date = #{inputDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="inputCompany != null">
+        input_company = #{inputCompany,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jxh.sor.entity.BoglogLogisticsControlTable">
+    update boglog_logistics_control_table
+    set work_sheet_no = #{workSheetNo,jdbcType=VARCHAR},
+      ctype = #{ctype,jdbcType=VARCHAR},
+      corporation = #{corporation,jdbcType=VARCHAR},
+      waybill_id = #{waybillId,jdbcType=VARCHAR},
+      remarks = #{remarks,jdbcType=VARCHAR},
+      input_person = #{inputPerson,jdbcType=INTEGER},
+      input_date = #{inputDate,jdbcType=TIMESTAMP},
+      input_company = #{inputCompany,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
